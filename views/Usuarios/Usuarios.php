@@ -1,14 +1,10 @@
 <?php 
 // Cargar dependencias
-include ('../INVENTARIOS_NGBJ/views/menu.php');
-include ('../INVENTARIOS_NGBJ/views/Usuarios/Register.php');
-include ('../INVENTARIOS_NGBJ/views/Usuarios/Edit.php');
-include ('../INVENTARIOS_NGBJ/views/Usuarios/Delete.php');
+include ('../menu.php');
 
 if (!class_exists('UsuarioController')) {
-    require_once '../INVENTARIOS_NGBJ/controllers/UsuarioController.php';
+    require_once '../../controllers/UsuarioController.php';
 }
-
 
 $usuarioController = new UsuarioController();
 $usuarios = $usuarioController->index();
@@ -28,7 +24,8 @@ $usuarios = $usuarioController->index();
             <input type="text" class="form-control" placeholder="Buscar..." style="display: inline-block; width: 300px;">
             <button class="btn btn-primary ml-2">Buscar</button>
         </div>
-        <button class="btn btn-success" data-toggle="modal" data-target="#addUserModal">Agregar Usuario</button>
+        <!-- Botón de Agregar Usuario -->
+        <button class="btn btn-success" onclick="window.location.href='./Register.php';">Agregar Usuario</button>
     </div>
     <table class="table table-bordered">
         <thead class="thead-dark">
@@ -49,24 +46,16 @@ $usuarios = $usuarioController->index();
                         <td><?= htmlspecialchars($usuario['Email']); ?></td>
                         <td><?= htmlspecialchars($usuario['Cargo_id']); ?></td>
                         <td>
+                            <!-- Botón de Editar Usuario -->
                             <button 
                                 class="btn btn-warning btn-sm edit-user-btn" 
-                                data-toggle="modal" 
-                                data-target="#editUserModal"
-                                data-id="<?= $usuario['Id']; ?>"
-                                data-nombre="<?= htmlspecialchars($usuario['Nombre']); ?>"
-                                data-numero-documento="<?= htmlspecialchars($usuario['Numero_documento']); ?>"
-                                data-email="<?= htmlspecialchars($usuario['Email']); ?>"
-                                data-tipo-identificacion-id="<?= htmlspecialchars($usuario['Tipo_identificacion_id']); ?>"
-                                data-cargo-id="<?= htmlspecialchars($usuario['Cargo_id']); ?>"
-                            >
+                                onclick="window.location.href='Edit.php?id=<?= $usuario['Id']; ?>'">
                                 Editar
                             </button>
+                            <!-- Botón de Eliminar Usuario -->
                             <button 
                                 class="btn btn-danger btn-sm delete-user-btn" 
-                                data-toggle="modal" 
-                                data-target="#deleteUserModal"
-                                data-id="<?= $usuario['Id']; ?>">
+                                onclick="window.location.href='Delete.php?id=<?= $usuario['Id']; ?>'">
                                 Eliminar
                             </button>
                         </td>
@@ -77,7 +66,7 @@ $usuarios = $usuarioController->index();
                     <td colspan="5" class="text-center">No hay usuarios registrados.</td>
                 </tr>
             <?php endif; ?>
-            </tbody>
+        </tbody>
     </table>
 </div>
 </body>

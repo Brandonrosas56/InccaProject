@@ -1,7 +1,7 @@
 <?php
-if (!class_exists('UsuarioController')) {
-    require_once '../INVENTARIOS_NGBJ/controllers/UsuarioController.php';
-}
+
+require_once '../../controllers/UsuarioController.php';
+require_once '../menu.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = [
@@ -16,65 +16,55 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $usuarioController = new UsuarioController();
     $usuarioController->create($data);
-    
+
+    // Redirigir a Usuarios.php usando JavaScript, para evitar problemas con headers
+    echo "<script>
+            alert('Usuario agregado correctamente');
+            window.location.href = './Usuarios.php';
+          </script>";
     exit;
 }
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Agregar Usuario</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addUserModalLabel">Agregar Usuario</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form id="addUserForm" method="POST">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="numero_documento">Número de Documento</label>
-                            <input type="number" class="form-control" id="numero_documento" name="numero_documento" placeholder="Ingrese el número de documento" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese el correo electronico" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="tipo_identificacion_id">Tipo de Identificación</label>
-                            <input type="number" class="form-control" id="tipo_identificacion_id" name="tipo_identificacion_id" placeholder="ID de tipo de identificación" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="cargo_id">Cargo</label>
-                            <input type="number" class="form-control" id="cargo_id" name="cargo_id" placeholder="ID del cargo" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Contraseña</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese la contraseña" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                    </div>
-                </form>
+    <div class="container mt-4">
+        <h3>Agregar Usuario</h3>
+        <form id="addUserForm" method="POST" action="Register.php">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre" required>
             </div>
-        </div>
+            <div class="form-group">
+                <label for="numero_documento">Número de Documento</label>
+                <input type="number" class="form-control" id="numero_documento" name="numero_documento" placeholder="Ingrese el número de documento" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese el correo electrónico" required>
+            </div>
+            <div class="form-group">
+                <label for="tipo_identificacion_id">Tipo de Identificación</label>
+                <input type="number" class="form-control" id="tipo_identificacion_id" name="tipo_identificacion_id" placeholder="ID de tipo de identificación" required>
+            </div>
+            <div class="form-group">
+                <label for="cargo_id">Cargo</label>
+                <input type="number" class="form-control" id="cargo_id" name="cargo_id" placeholder="ID del cargo" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese la contraseña" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a href="Usuarios.php" class="btn btn-secondary">Cancelar</a>
+        </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

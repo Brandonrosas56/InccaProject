@@ -10,13 +10,13 @@
     <meta name="author" content="" />
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
-    <link href="assets/css/styles.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="assets/css/estilo.css">
+    <link href="../../assets/css/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="../../assets/css/estilo.css">
 </head>
 
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="?controller=home"><img src="assets/images/logi.png" alt="Logotipo" class="logo" style="max-width: 200px;"></a>
+        <a class="navbar-brand" href="?controller=home"><img src="../../assets/images/logi.png" alt="Logotipo" class="logo" style="max-width: 200px;"></a>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggles" style="color: rgba(255, 255, 255, 0.5) !important;" href="#"><i class="fas fa-bars"></i></button>
         <!-- Navbar cerrar-->
         <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
