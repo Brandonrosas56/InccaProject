@@ -1,0 +1,161 @@
+/*//////////////////////////////////////////////////////////////////
+[ FONT ]*/
+
+@font-face {
+    font-family: Poppins-Regular;
+    src: url('../fonts/poppins/Poppins-Regular.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-Medium;
+    src: url('../fonts/poppins/Poppins-Medium.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-Bold;
+    src: url('../fonts/poppins/Poppins-Bold.ttf'); 
+  }
+  
+  @font-face {
+    font-family: Poppins-SemiBold;
+    src: url('../fonts/poppins/Poppins-SemiBold.ttf'); 
+  }
+body{
+    font-family: Poppins-Regular !important;
+}
+/*.boton_agregar{
+    border: solid 1px orange;
+    background-color: orange;
+    color: white;
+}
+.boton_agregar:hover{
+    background-color: white;
+}*/
+.boton_formu{
+    justify-content: center;
+}
+
+.titulo_tabla{
+    float: left;
+    margin-left: 40px;
+}
+
+
+.formular{
+    column-count: 4; 
+    column-gap: 3em;
+}
+
+.breadcrumb-item.active{
+    color: orange !important;
+}
+select{
+    outline: none;
+    border:none;
+}
+.migaja{
+    width: 98% !important;
+    margin-left: 10px !important;
+    margin-top: 10px !important;
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff;
+    background-color: orange !important;
+    border-color: orange !important;
+}
+
+
+.boton_agregar{
+    justify-content: flex-end;
+    margin-right: 20px;
+}
+
+.iconito_agregar{
+    margin-right: 10px;
+}
+
+.boton_user{
+    font-family: Poppins-Regular !important;
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    font-size: 15px;
+    color: orange;
+    border: none;
+    outline: none !important;
+    font-weight: 800;
+}
+.boton_user:hover{
+    color: white;
+    border-color: orange;
+    background-color: orange;
+    transition: 1s;
+}
+.rol{
+    color: orange;
+    text-align: center;
+}
+.boton_menu {
+    width: 25px;
+    height: 5px;
+    border-radius: 10px;
+}
+.ico_cerrar{
+    font-size: 250px;
+    color: red;
+}
+
+.MenuAmburguesa:after,
+.MenuAmburguesa:before,
+.MenuAmburguesa {
+
+    transition: 1s;
+    position: absolute;
+    width: 25px;
+    content: '';
+    border-radius: 10px;
+    background-color: orange;
+}
+
+.MenuAmburguesa {
+    border-radius: 10px;
+    height: 5px;
+}
+
+.MenuAmburguesa:before {
+    height: 5px;
+    top: 8px;
+    border-radius: 10px;
+}
+
+.MenuAmburguesa:after {
+    height: 5px;
+    top: -8px;
+    border-radius: 10px;
+}
+
+
+.crus {
+    border-radius: 10px;
+    transition: 1s;
+    transform: rotateZ(45deg);
+}
+
+.crus:before {
+    border-radius: 10px;
+    transition: 1s;
+    top: 0px;
+    transform: rotateZ(90deg);
+
+}
+
+.crus:after {
+    transition: 1s;
+    top: 0px;
+    transform: rotateZ(0deg);
+    border-radius: 10px;
+}

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="cars-in-the-parking-lot-side-view">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/assets/images/cars-in-the-parking-lot-side-view.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
