@@ -1,30 +1,3 @@
-<?php
-if (!class_exists('UsuarioController')) {
-    require_once '../INVENTARIOS_NGBJ/controllers/UsuarioController.php';
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $data = [
-        'id' => $_POST['id'],
-        'nombre' => $_POST['nombre'],
-        'numero_documento' => $_POST['numero_documento'],
-        'email' => $_POST['email'],
-        'tipo_identificacion_id' => (int)$_POST['tipo_identificacion_id'],
-        'cargo_id' => (int)$_POST['cargo_id']
-    ];
-
-    if (!empty($_POST['contraseña'])) {
-        $data['contraseña'] = password_hash($_POST['contraseña'], PASSWORD_DEFAULT);
-    }
-
-    $usuarioController = new UsuarioController();
-    $usuarioController->update($data);
-
-    echo '<script>window.location.href = "Usuarios.php";</script>';
-}
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,7 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form id="editUserForm">
+                <form id="editUserForm" method="POST">
+                    <!-- Campo oculto con la acción "update" -->
+                    <input type="hidden" name="action" value="update">
+                    
+                    <!-- Campo oculto con el ID del usuario -->
+                    <input type="hidden" name="id" id="userIdToEdit">
+
                     <div class="modal-body">
                         <!-- Los mismos campos que el modal de agregar -->
                         <div class="form-group">
@@ -68,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <div class="form-group">
                             <label for="edit_contraseña">Contraseña</label>
-                            <input type="password" class="form-control" id="edit_contraseña" name="contraseña" placeholder="Ingrese la nueva contraseña" required>
+                            <input type="password" class="form-control" id="edit_contraseña" name="contraseña" placeholder="Ingrese la nueva contraseña">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -95,20 +74,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     const tipoIdentificacionId = this.getAttribute('data-tipo-identificacion-id');
                     const cargoId = this.getAttribute('data-cargo-id');
 
+                    // Asignar valores a los campos del formulario
                     document.getElementById('edit_nombre').value = nombre;
                     document.getElementById('edit_numero_documento').value = numeroDocumento;
                     document.getElementById('email').value = email;
                     document.getElementById('edit_tipo_identificacion_id').value = tipoIdentificacionId;
                     document.getElementById('edit_cargo_id').value = cargoId;
 
-                    // Guardar el ID en un campo oculto
-                    const form = document.getElementById('editUserForm');
-                    form.setAttribute('data-id', id);
+                    // Guardar el ID del usuario en el campo oculto
+                    document.getElementById('userIdToEdit').value = id;
                 });
             });
         });
     </script>
-
-
 </body>
 </html>

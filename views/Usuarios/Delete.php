@@ -1,21 +1,3 @@
-<?php
-if (!class_exists('UsuarioController')) {
-    require_once '../INVENTARIOS_NGBJ/controllers/UsuarioController.php';
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_REQUEST['id'])) {
-        $usuarioController = new UsuarioController();
-        $usuarioController->delete($_REQUEST['id']);
-    }
-
-    // Redirigir a la página principal después de eliminar
-    header("Location: gestion_usuarios.php"); // Asegúrate de usar la URL correcta
-    exit;
-}
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <!-- Modal de Confirmación de Eliminación -->
+   <!-- Modal de Confirmación de Eliminación -->
 <div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="deleteUserModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -34,11 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="deleteUserForm" method="POST"> <!-- Accion al backend -->
+            <form id="deleteUserForm" method="POST">
                 <div class="modal-body">
+                    <input type="hidden" name="action" value="delete"> <!-- Acción eliminar -->
+                    <input type="hidden" name="id" id="userIdToDelete"> <!-- ID del usuario -->
                     <p>¿Está seguro de que desea eliminar este usuario? Esta acción no se puede deshacer.</p>
-                    <!-- ID del usuario que se va a eliminar -->
-                    <input type="hidden" name="id" id="userIdToDelete">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -50,12 +33,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 
-
     <script>
         document.getElementById('confirmDeleteButton').addEventListener('click', function () {
             alert('Usuario eliminado con éxito.');
             $('#deleteUserModal').modal('hide');
         });
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Manejo de los botones de eliminar
+            document.querySelectorAll('.delete-user-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    // Obtener el ID del usuario desde el atributo 'data-id' del botón
+                    const userId = this.getAttribute('data-id');
+                    
+                    console.log('User ID para eliminar:', userId); // Debugging: Verifica el ID
+
+                    // Asignar el ID al campo oculto del formulario
+                    document.getElementById('userIdToDelete').value = userId;
+
+                    // Abre el modal de eliminación
+                    $('#deleteUserModal').modal('show');
+                });
+            });
+        });
+    </script>
+
 </body>
 </html>

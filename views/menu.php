@@ -41,6 +41,17 @@
 
                         </a>
                         <div class="sb-sidenav-menu-heading">Gestion</div>
+                        <!-- Usuario-->
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseIdentificacion" aria-expanded="false" aria-controls="collapseIdentificacion">
+                            <div class="sb-nav-link-icon"><i class="fa fa-id-card"></i></div>
+                            Usuario
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseIdentificacion" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="?controller=tipoidentificacion">Gestionar</a>
+                            </nav>
+                        </div>
                         <!-- Producto-->
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProducto" aria-expanded="false" aria-controls="collapseProducto">
                             <div class="sb-nav-link-icon"><i class="fa fa-cookie-bite"></i></div>
@@ -75,18 +86,6 @@
                             </nav>
                         </div>
                         <!-- Identificacion-->
-                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseIdentificacion" aria-expanded="false" aria-controls="collapseIdentificacion">
-                            <div class="sb-nav-link-icon"><i class="fa fa-id-card"></i></div>
-                            Identificación
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseIdentificacion" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="?controller=tipoidentificacion">Gestionar</a>
-                            </nav>
-                        </div>
-
-
                         <div class="sb-sidenav-menu-heading">Inventarios</div>
                         <a class="nav-link" href="charts.html">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>

@@ -7,7 +7,7 @@ class UsuarioController
 
     public function __construct()
     {
-        $this->model = new Usuario(); // Instanciamos el modelo Usuario
+        $this->model = new Usuario(); 
     }
 
     public function index()
@@ -17,19 +17,17 @@ class UsuarioController
 
     public function create($data)
     {
-        // Llama al modelo para insertar los datos
         $this->model->insert($data);
     }
 
-    public function delete($id) {
-        // Asegúrate de que el ID es válido
-        if (empty($id)) {
-            die("ID de usuario no válido.");
-        }
+    public function update($data)
+    {
+        $this->model->update($data);
+    }
 
-        // Crear una instancia del modelo y llamar al método delete
-        $usuarioModel = new Usuario();
-        $usuarioModel->delete($id);
+
+    public function delete($id) {
+        $this->model->delete($id);
     }
     
 }

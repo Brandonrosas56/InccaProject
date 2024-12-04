@@ -4,11 +4,11 @@ include ('../INVENTARIOS_NGBJ/views/menu.php');
 include ('../INVENTARIOS_NGBJ/views/Usuarios/Register.php');
 include ('../INVENTARIOS_NGBJ/views/Usuarios/Edit.php');
 include ('../INVENTARIOS_NGBJ/views/Usuarios/Delete.php');
+include ('../INVENTARIOS_NGBJ/views/Usuarios/Logic.php');
 
 if (!class_exists('UsuarioController')) {
     require_once '../INVENTARIOS_NGBJ/controllers/UsuarioController.php';
 }
-
 
 $usuarioController = new UsuarioController();
 $usuarios = $usuarioController->index();
@@ -20,17 +20,18 @@ $usuarios = $usuarioController->index();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Usuarios</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <div class="container mt-4">
     <div class="d-flex justify-content-between mb-3">
         <div>
-            <input type="text" class="form-control" placeholder="Buscar..." style="display: inline-block; width: 300px;">
-            <button class="btn btn-primary ml-2">Buscar</button>
+            <input id="searchInput" type="text" class="form-control" placeholder="Buscar..." style="display: inline-block; width: 300px;">
+            <button class="btn btn-primary ml-2" onclick="searchData()">Buscar</button>
         </div>
         <button class="btn btn-success" data-toggle="modal" data-target="#addUserModal">Agregar Usuario</button>
     </div>
-    <table class="table table-bordered">
+    <table id="userTable" class="table table-bordered">
         <thead class="thead-dark">
             <tr>
                 <th>NOMBRE</th>
@@ -62,6 +63,7 @@ $usuarios = $usuarioController->index();
                             >
                                 Editar
                             </button>
+                            <!-- Botón de eliminar -->
                             <button 
                                 class="btn btn-danger btn-sm delete-user-btn" 
                                 data-toggle="modal" 
@@ -77,8 +79,35 @@ $usuarios = $usuarioController->index();
                     <td colspan="5" class="text-center">No hay usuarios registrados.</td>
                 </tr>
             <?php endif; ?>
-            </tbody>
+        </tbody>
     </table>
 </div>
+
+<script>
+    function searchData() {
+        // Obtener el valor de búsqueda
+        let searchTerm = $('#searchInput').val().toLowerCase();
+
+        // Filtrar las filas de la tabla
+        $('#userTable tbody tr').each(function() {
+            var rowText = $(this).text().toLowerCase();
+
+            // Si la fila contiene el término de búsqueda, la mostramos
+            if (rowText.indexOf(searchTerm) !== -1) {
+                $(this).show();
+            } else {
+                $(this).hide(); // De lo contrario, la ocultamos
+            }
+        });
+    }
+
+    // Evento para ejecutar la búsqueda cuando el usuario presiona "Enter" en el campo de búsqueda
+    $('#searchInput').on('keyup', function(event) {
+        if (event.key === 'Enter') {
+            searchData();
+        }
+    });
+</script>
+
 </body>
 </html>

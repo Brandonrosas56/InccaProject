@@ -1,28 +1,3 @@
-<?php
-if (!class_exists('UsuarioController')) {
-    require_once '../INVENTARIOS_NGBJ/controllers/UsuarioController.php';
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $data = [
-        'nombre' => $_POST['nombre'] ?? null,
-        'numero_documento' => $_POST['numero_documento'] ?? null,
-        'email' => $_POST['email'] ?? null,
-        'tipo_identificacion_id' => isset($_POST['tipo_identificacion_id']) ? (int)$_POST['tipo_identificacion_id'] : null,
-        'cargo_id' => isset($_POST['cargo_id']) ? (int)$_POST['cargo_id'] : null,
-        'empresa_id' => 1, // Valor quemado
-        'password' => !empty($_POST['password']) ? $_POST['password'] : null, // Permitir null si está vacío
-    ];
-
-    $usuarioController = new UsuarioController();
-    $usuarioController->create($data);
-    
-    exit;
-}
-
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <form id="addUserForm" method="POST">
                     <div class="modal-body">
+                        <input type="hidden" name="action" value="add"> <!-- Acción agregar -->
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
                             <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre" required>
@@ -53,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese el correo electronico" required>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese el correo electrónico" required>
                         </div>
                         <div class="form-group">
                             <label for="tipo_identificacion_id">Tipo de Identificación</label>
@@ -76,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
     </div>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

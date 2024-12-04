@@ -60,44 +60,75 @@ class Database
         }
     }
 
-    public function update($procedure, $data)
+    public function update($table, $where, $data)
+{
+    // Construir la parte SET de la consulta
+    $set = "";
+    foreach ($data as $key => $value) {
+        // No agregar el campo 'id' al SET, ya que es parte de la cláusula WHERE
+        if ($key != 'id') {
+            // Cambiar 'nombre' a 'Nombre', 'numero_documento' a 'Numero_documento', etc.
+            $set .= ucfirst($key) . " = :$key, ";  // Convertir la primera letra a mayúscula para coincidir con la base de datos
+        }
+    }
+    $set = rtrim($set, ', '); // Eliminar la última coma
+
+    // Crear la consulta SQL
+    $sql = "UPDATE $table SET $set WHERE $where";
+
+    // Mostrar la consulta generada para depuración
+
+
+    // Preparar la consulta
+    try {
+        $stmt = $this->conn->prepare($sql);  // Preparamos la consulta
+
+        // Vincular los parámetros con sus valores
+        foreach ($data as $key => $value) {
+            // Vinculamos cada parámetro con su valor
+            if ($key != 'id') {
+                $stmt->bindValue(":$key", $value);
+            }
+        }
+
+        // Asegurarnos de vincular el parámetro 'id' en caso de que sea parte del WHERE
+        if (isset($data['id'])) {
+            $stmt->bindValue(':id', $data['id'], PDO::PARAM_INT);  // Vinculamos 'id' para el WHERE
+        }
+
+        // Ejecutar la consulta
+        $stmt->execute();
+
+        echo "Registro actualizado correctamente.";
+    } catch (PDOException $e) {
+        die("Error en la consulta SQL: " . $e->getMessage());
+    }
+}
+
+    
+
+    
+  
+
+
+    
+
+
+    public function delete($table, $where, $data)
     {
         try {
-            $params = '';
-            foreach ($data as $key => $value) {
-                $params .= ":$key,";
-            }
-            $params = rtrim($params, ',');
+            $sql = "DELETE FROM $table WHERE $where LIMIT 1"; 
 
-            $strSql = $this->conn->prepare("CALL $procedure($params)"); // Usamos $this->conn->prepare
-
-            foreach ($data as $key => &$value) {
-                $strSql->bindParam(":$key", $value);
-            }
-
-            $strSql->execute();
-        } catch (PDOException $e) {
-            die($e->getMessage());
-        }
-    }
-
-    public function delete($table, $where, $params = [], $limit = 1) {
-        // Preparamos la consulta con parámetros vinculados
-        $sql = "DELETE FROM $table WHERE $where LIMIT $limit"; // Consulta DELETE con límite
-        
-        try {
-            // Usamos el método execute de PDO para ejecutar la consulta preparada
             $stmt = $this->conn->prepare($sql);
-            
-            // Vinculamos los parámetros (en este caso, solo el ID)
-            foreach ($params as $key => &$value) {
-                $stmt->bindParam($key, $value);
+
+            foreach ($data as $key => $value) {
+                $stmt->bindValue(":$key", $value);
             }
-            
-            // Ejecutamos la consulta
+
             $stmt->execute();
         } catch (PDOException $e) {
-            die("Error al eliminar el registro: " . $e->getMessage());
+            die("Error al eliminar: " . $e->getMessage());
         }
     }
+
 }
